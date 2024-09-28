@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Employee Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .action-btns {
+            display: flex;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Users List</h1>
+    <div style="text-align: left;">
+        <a href="/employees/new" style="padding: 10px; background-color: #0000FF; color: white; text-decoration: none; border-radius: 5px;">Add Employee</a>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="employee : ${employees}">
+            <td th:text="${employee.firstName}"></td>
+            <td th:text="${employee.lastName}"></td>
+            <td th:text="${employee.email}"></td>
+            <td>
+                <div class="action-btns">
+                    <a th:href="@{/employees/edit/{id}(id=${employee.id})}" style="padding: 5px; background-color: #007bff; color: white; text-decoration: none; border-radius: 3px;">Update</a>
+                    <a th:href="@{/employees/delete/{id}(id=${employee.id})}" style="padding: 5px; background-color: #dc3545; color: white; text-decoration: none; border-radius: 3px;">Delete</a>
+                    <a th:href="@{/employees/view/{id}(id=${employee.id})}" style="padding: 5px; background-color: #17a2b8; color: white; text-decoration: none; border-radius: 3px;">View</a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
